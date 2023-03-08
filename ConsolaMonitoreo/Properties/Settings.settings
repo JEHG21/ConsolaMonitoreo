@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ConsolaMonitoreo.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConsolaMonitoreo__bimovilDesaV2_Mensajes_Tokens" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.2.0.189/bimovil_tokens/mensajes.asmx</Value>
+    </Setting>
+    <Setting Name="ConsolaMonitoreo__BiMovilProduccionV3_Mensajes_Tokens" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://bimovilwebservices/bimovil_tokens/mensajes.asmx</Value>
+    </Setting>
+    <Setting Name="ConsolaMonitoreo_desarrollo_Mensajes_Tokens" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.10.14.87/bimovil_tokens/mensajes.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

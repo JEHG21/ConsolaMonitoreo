@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://10.1.1.53/bimovil_tokens" xmlns:s0="http://10.1.1.53/bimovil_tokensX" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://10.1.1.53/envia_mensaje_email" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://10.1.1.53/bimovil_tokens" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Menasjes de Tokens a través de BiMóvil</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://10.1.1.53/bimovil_tokensX">
+      <s:element name="Envia_Mensaje">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Telefono_SMS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Operador" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mensaje_TXT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Numero_Transaccion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="enmascarar_desde" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="enmascarar_hasta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Envia_MensajeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Envia_MensajeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://10.1.1.53/bimovil_tokens">
+      <s:element name="Lista_Operadores">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Lista_OperadoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Lista_OperadoresResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://10.1.1.53/envia_mensaje_email">
+      <s:element name="envia_mensaje_email">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mensaje_TXT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Numero_Transaccion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="instancia_aws" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pais" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="enmascarar_desde" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="enmascarar_hasta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="envia_mensaje_emailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="envia_mensaje_emailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Envia_MensajeSoapIn">
+    <wsdl:part name="parameters" element="s0:Envia_Mensaje" />
+  </wsdl:message>
+  <wsdl:message name="Envia_MensajeSoapOut">
+    <wsdl:part name="parameters" element="s0:Envia_MensajeResponse" />
+  </wsdl:message>
+  <wsdl:message name="Lista_OperadoresSoapIn">
+    <wsdl:part name="parameters" element="tns:Lista_Operadores" />
+  </wsdl:message>
+  <wsdl:message name="Lista_OperadoresSoapOut">
+    <wsdl:part name="parameters" element="tns:Lista_OperadoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="envia_mensaje_emailSoapIn">
+    <wsdl:part name="parameters" element="s2:envia_mensaje_email" />
+  </wsdl:message>
+  <wsdl:message name="envia_mensaje_emailSoapOut">
+    <wsdl:part name="parameters" element="s2:envia_mensaje_emailResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Mensajes_TokensSoap">
+    <wsdl:operation name="Envia_Mensaje">
+      <wsdl:input message="tns:Envia_MensajeSoapIn" />
+      <wsdl:output message="tns:Envia_MensajeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Lista_Operadores">
+      <wsdl:input message="tns:Lista_OperadoresSoapIn" />
+      <wsdl:output message="tns:Lista_OperadoresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="envia_mensaje_email">
+      <wsdl:input message="tns:envia_mensaje_emailSoapIn" />
+      <wsdl:output message="tns:envia_mensaje_emailSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Mensajes_TokensSoap" type="tns:Mensajes_TokensSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Envia_Mensaje">
+      <soap:operation soapAction="http://10.1.1.53/bimovil_tokensX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Lista_Operadores">
+      <soap:operation soapAction="http://10.1.1.53/bimovil_tokens" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="envia_mensaje_email">
+      <soap:operation soapAction="http://10.1.1.53/envia_mensaje_email" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Mensajes_TokensSoap12" type="tns:Mensajes_TokensSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Envia_Mensaje">
+      <soap12:operation soapAction="http://10.1.1.53/bimovil_tokensX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Lista_Operadores">
+      <soap12:operation soapAction="http://10.1.1.53/bimovil_tokens" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="envia_mensaje_email">
+      <soap12:operation soapAction="http://10.1.1.53/envia_mensaje_email" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Mensajes_Tokens">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Menasjes de Tokens a través de BiMóvil</wsdl:documentation>
+    <wsdl:port name="Mensajes_TokensSoap" binding="tns:Mensajes_TokensSoap">
+      <soap:address location="http://10.2.0.189/bimovil_tokens/mensajes.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Mensajes_TokensSoap12" binding="tns:Mensajes_TokensSoap12">
+      <soap12:address location="http://10.2.0.189/bimovil_tokens/mensajes.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
