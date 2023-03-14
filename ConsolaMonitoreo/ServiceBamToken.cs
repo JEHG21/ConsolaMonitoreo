@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace ConsolaMonitoreo
 {
-    public class ServiceBIToken
+    public class ServiceBamToken
     {
         public static HttpWebRequest CreateWebRequest(string typeCore)
         {
@@ -87,8 +87,8 @@ namespace ConsolaMonitoreo
                 //Enviamos alerta interna por medio de Slack
                 Request.WebHookPostMessage(msg);
 
-                //Enviamos alerta al banco por medio de BIMovil
-                //ServiceBIMovil.SendBiMovil(msg);
+                //Enviamos alerta al banco por medio de SmtpBAM
+                ServiceEmail.SendMail(msg);
 
                 transaction.AssignTokenTypeStackTrace = e.StackTrace;
             }
@@ -156,8 +156,8 @@ namespace ConsolaMonitoreo
                 //Enviamos alerta interna por medio de Slack
                 Request.WebHookPostMessage(msg);
 
-                //Enviamos alerta al banco por medio de BIMovil
-                //ServiceBIMovil.SendBiMovil(msg);
+                //Enviamos alerta al banco por medio de SmtpBAM
+                ServiceEmail.SendMail(msg);
 
                 transaction.GetTokenTypeStackTrace = e.StackTrace;
             }
@@ -225,8 +225,8 @@ namespace ConsolaMonitoreo
                 //Enviamos alerta interna por medio de Slack
                 Request.WebHookPostMessage(msg);
 
-                //Enviamos alerta al banco por medio de BIMovil
-                //ServiceBIMovil.SendBiMovil(msg);
+                //Enviamos alerta al banco por medio de SmtpBAM
+                ServiceEmail.SendMail(msg);
 
                 transaction.ValidateTokenStackTrace = e.StackTrace;
             }
@@ -294,8 +294,8 @@ namespace ConsolaMonitoreo
                 //Enviamos alerta interna por medio de Slack
                 Request.WebHookPostMessage(msg);
 
-                //Enviamos alerta al banco por medio de BIMovil
-                //ServiceBIMovil.SendBiMovil(msg);
+                //Enviamos alerta al banco por medio de SmtpBAM
+                ServiceEmail.SendMail(msg);
 
                 transaction.ResyncDeviceStackTrace = e.StackTrace;
             }

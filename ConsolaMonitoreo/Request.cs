@@ -42,7 +42,7 @@ namespace ConsolaMonitoreo
                 {
                     dataList.Add(transaction);
 
-                    var assignTokenType = ServiceBIToken.ExecuteAssignTokenType(transaction);
+                    var assignTokenType = ServiceBamToken.ExecuteAssignTokenType(transaction);
 
                     if (assignTokenType != null)
                     {
@@ -57,8 +57,8 @@ namespace ConsolaMonitoreo
                             //Enviamos alerta interna por medio de Slack
                             WebHookPostMessage(msg);
 
-                            //Enviamos alerta al banco por medio de BIMovil
-                            //ServiceBIMovil.SendBiMovil(msg);
+                            //Enviamos alerta al banco por medio de SmtpBAM
+                            ServiceEmail.SendMail(msg);
                         }
                     }
                 }
@@ -94,7 +94,7 @@ namespace ConsolaMonitoreo
                 {
                     dataList.Add(transaction);
 
-                    var getTokenType = ServiceBIToken.ExecuteGetTokenType(transaction);
+                    var getTokenType = ServiceBamToken.ExecuteGetTokenType(transaction);
 
                     if (getTokenType != null)
                     {
@@ -109,8 +109,8 @@ namespace ConsolaMonitoreo
                             //Enviamos alerta interna por medio de Slack
                             WebHookPostMessage(msg);
 
-                            //Enviamos alerta al banco por medio de BIMovil
-                            //ServiceBIMovil.SendBiMovil(msg);
+                            //Enviamos alerta al banco por medio de SmtpBAM
+                            ServiceEmail.SendMail(msg);
                         }
                     }
                 }
@@ -152,26 +152,26 @@ namespace ConsolaMonitoreo
                 {
                     dataList.Add(transaction);
 
-                        var validateToken = ServiceBIToken.ExecuteValidateToken(transaction);
+                    var validateToken = ServiceBamToken.ExecuteValidateToken(transaction);
 
-                            var response = JsonConvert.DeserializeObject<Response>(validateToken);
+                    var response = JsonConvert.DeserializeObject<Response>(validateToken);
 
-                            if (response.errCode.Equals("200") || response.errCode.Equals("303"))
-                            {
+                    if (response.errCode.Equals("200") || response.errCode.Equals("303"))
+                    {
 
-                            }
-                            else
-                            {
-                                string msg = "Respuesta no esperada - ValidateToken - " + transaction.Username + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
+                    }
+                    else
+                    {
+                        string msg = "Respuesta no esperada - ValidateToken - " + transaction.Username + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
 
-                                Console.WriteLine(msg);
+                        Console.WriteLine(msg);
 
-                                //Enviamos alerta interna por medio de Slack
-                                WebHookPostMessage(msg);
+                        //Enviamos alerta interna por medio de Slack
+                        WebHookPostMessage(msg);
 
-                                //Enviamos alerta al banco por medio de BIMovil
-                                //ServiceBIMovil.SendBiMovil(msg);
-                            }
+                        //Enviamos alerta al banco por medio de SmtpBAM
+                        ServiceEmail.SendMail(msg);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -204,26 +204,26 @@ namespace ConsolaMonitoreo
                 {
                     dataList.Add(transaction);
 
-                        var resyncDevice = ServiceBIToken.ExecuteResyncDevice(transaction);
+                    var resyncDevice = ServiceBamToken.ExecuteResyncDevice(transaction);
 
-                        var response = JsonConvert.DeserializeObject<Response>(resyncDevice);
+                    var response = JsonConvert.DeserializeObject<Response>(resyncDevice);
 
-                        if (response.errCode.Equals("850"))
-                        {
+                    if (response.errCode.Equals("850"))
+                    {
 
-                        }
-                        else
-                        {
-                            string msg = "Respuesta no esperada - ResyncDevice - UserMonitoreo" + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
+                    }
+                    else
+                    {
+                        string msg = "Respuesta no esperada - ResyncDevice - UserMonitoreo" + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
 
-                            Console.WriteLine(msg);
+                        Console.WriteLine(msg);
 
-                            //Enviamos alerta interna por medio de Slack
-                            WebHookPostMessage(msg);
+                        //Enviamos alerta interna por medio de Slack
+                        WebHookPostMessage(msg);
 
-                            //Enviamos alerta al banco por medio de BIMovil
-                            //ServiceBIMovil.SendBiMovil(msg);
-                        }
+                        //Enviamos alerta al banco por medio de SmtpBAM
+                        ServiceEmail.SendMail(msg);
+                    }
                 }
                 catch (Exception ex)
                 {

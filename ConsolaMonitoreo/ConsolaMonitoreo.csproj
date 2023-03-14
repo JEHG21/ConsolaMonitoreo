@@ -69,7 +69,8 @@
     <Compile Include="Request.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="ServiceBIMovil.cs" />
-    <Compile Include="ServiceBIToken.cs" />
+    <Compile Include="ServiceBamToken.cs" />
+    <Compile Include="ServiceEmail.cs" />
     <Compile Include="SlackClient.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="User.cs" />
