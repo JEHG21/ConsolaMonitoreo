@@ -13,8 +13,13 @@ namespace ConsolaMonitoreo
         public static void Main(string[] args)
         {
             Request.AssignTokenType();
+            Console.WriteLine("Executing AssignTokenType...");
             Request.GetTokenType();
-            Request.GenerateToken();
+            Console.WriteLine("Executing GetTokenType...");
+            Request.ValidateToken();
+            Console.WriteLine("Executing ValidateToken...");
+            Request.ResyncDevice();
+            Console.WriteLine("Executing ResyncDevice...");
         }
     }
 }

@@ -17,5 +17,8 @@ namespace ConsolaMonitoreo
         public string TokenType;
         public string Phone;
         public string TransactionID;
+        public string DeviceID;
+        public string Timestamp;
+        public string DeviceIdOneSignal;
     }
 }

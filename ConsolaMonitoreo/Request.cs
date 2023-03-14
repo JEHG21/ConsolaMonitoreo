@@ -34,6 +34,7 @@ namespace ConsolaMonitoreo
                     TelefonoBackup = "",
                     EmailDefault = "",
                     EmailBackup = "",
+                    AccountNumber = "",
                     TelcommService = "C",
                 };
 
@@ -57,7 +58,7 @@ namespace ConsolaMonitoreo
                             WebHookPostMessage(msg);
 
                             //Enviamos alerta al banco por medio de BIMovil
-                            ServiceBIMovil.SendBiMovil(msg);
+                            //ServiceBIMovil.SendBiMovil(msg);
                         }
                     }
                 }
@@ -109,7 +110,7 @@ namespace ConsolaMonitoreo
                             WebHookPostMessage(msg);
 
                             //Enviamos alerta al banco por medio de BIMovil
-                            ServiceBIMovil.SendBiMovil(msg);
+                            //ServiceBIMovil.SendBiMovil(msg);
                         }
                     }
                 }
@@ -122,7 +123,7 @@ namespace ConsolaMonitoreo
             }
         }
 
-        public static void GenerateToken()
+        public static void ValidateToken()
         {
             var rnd = new Random();
             var dataList = new List<Transaction>();
@@ -136,8 +137,9 @@ namespace ConsolaMonitoreo
                 {
                     Id = i + 1,
                     Installation = "0",
-                    Channel = record.Channel,
                     Username = record.Username,
+                    Channel = record.Channel,
+                    Token = "123456",
                     Country = record.Country,
                     TransactionId = record.TransactionID,
                     TransactionAmount = rnd.Next(100).ToString(),
@@ -150,21 +152,17 @@ namespace ConsolaMonitoreo
                 {
                     dataList.Add(transaction);
 
-                    if (record.Country.Equals("1"))
-                    {
-                        var generateToken = ServiceBIToken.ExecuteGenerateToken(transaction);
+                        var validateToken = ServiceBIToken.ExecuteValidateToken(transaction);
 
-                        if (generateToken != null)
-                        {
-                            var response = JsonConvert.DeserializeObject<Response>(generateToken);
+                            var response = JsonConvert.DeserializeObject<Response>(validateToken);
 
-                            if (response.errCode.Equals("200") || response.errCode.Equals("602"))
+                            if (response.errCode.Equals("200") || response.errCode.Equals("303"))
                             {
 
                             }
                             else
                             {
-                                string msg = "Respuesta no esperada - GenerateToken - " + transaction.Username + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
+                                string msg = "Respuesta no esperada - ValidateToken - " + transaction.Username + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
 
                                 Console.WriteLine(msg);
 
@@ -172,14 +170,64 @@ namespace ConsolaMonitoreo
                                 WebHookPostMessage(msg);
 
                                 //Enviamos alerta al banco por medio de BIMovil
-                                ServiceBIMovil.SendBiMovil(msg);
+                                //ServiceBIMovil.SendBiMovil(msg);
                             }
-                        }
-                    }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"GenerateToken - Error - {ex.Message}");
+                    Console.WriteLine($"ValidateToken - Error - {ex.Message}");
+                }
+
+                i++;
+            }
+        }
+
+        public static void ResyncDevice()
+        {
+            var rnd = new Random();
+            var dataList = new List<Transaction>();
+            var engine = new FileHelperEngine<User>();
+            var records = engine.ReadFile("datos.txt");
+
+            int i = 0;
+            foreach (var record in records)
+            {
+                var transaction = new Transaction
+                {
+                    Id = i + 1,
+                    DeviceID = record.DeviceID,
+                    Timestamp = record.Timestamp,
+                    DeviceIdOneSignal = record.DeviceIdOneSignal,
+                };
+
+                try
+                {
+                    dataList.Add(transaction);
+
+                        var resyncDevice = ServiceBIToken.ExecuteResyncDevice(transaction);
+
+                        var response = JsonConvert.DeserializeObject<Response>(resyncDevice);
+
+                        if (response.errCode.Equals("850"))
+                        {
+
+                        }
+                        else
+                        {
+                            string msg = "Respuesta no esperada - ResyncDevice - UserMonitoreo" + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
+
+                            Console.WriteLine(msg);
+
+                            //Enviamos alerta interna por medio de Slack
+                            WebHookPostMessage(msg);
+
+                            //Enviamos alerta al banco por medio de BIMovil
+                            //ServiceBIMovil.SendBiMovil(msg);
+                        }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"ResyncDevice - Error - {ex.Message}");
                 }
 
                 i++;

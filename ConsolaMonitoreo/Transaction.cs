@@ -34,25 +34,11 @@ namespace ConsolaMonitoreo
         public string BestImage { get; set; }
         public string TemplateRaw { get; set; }
         public string Dpi { get; set; }
+        public string Token { get; set; }
+        public string DeviceID { get; set; }
+        public string Timestamp { get; set; }
+        public string DeviceIdOneSignal { get; set; }
         public int ThreadNum { get; set; }
-
-        public string GetTokenTransactionRequest { get; set; }
-        public string GetTokenTransactionResponse { get; set; }
-        public bool GetTokenTransactionResponseStatus { get; set; }
-        public long GetTokenTransactionElapsedMilliseconds { get; set; }
-        public string GetTokenTransactionStackTrace { get; set; }
-
-        public string SendTokenTransactionRequest { get; set; }
-        public string SendTokenTransactionResponse { get; set; }
-        public bool SendTokenTransactionResponseStatus { get; set; }
-        public long SendTokenTransactionElapsedMilliseconds { get; set; }
-        public string SendTokenTransactionStackTrace { get; set; }
-
-        public string ValidateTokenTransactionRequest { get; set; }
-        public string ValidateTokenTransactionResponse { get; set; }
-        public bool ValidateTokenTransactionResponseStatus { get; set; }
-        public long ValidateTokenTransactionElapsedMilliseconds { get; set; }
-        public string ValidateTokenTransactionStackTrace { get; set; }
 
         public string AssignTokenTypeRequest { get; set; }
         public string AssignTokenTypeResponse { get; set; }
@@ -66,29 +52,17 @@ namespace ConsolaMonitoreo
         public long GetTokenTypeElapsedMilliseconds { get; set; }
         public string GetTokenTypeStackTrace { get; set; }
 
-        public string GenerateTokenRequest { get; set; }
-        public string GenerateTokenResponse { get; set; }
-        public bool GenerateTokenResponseStatus { get; set; }
-        public long GenerateTokenElapsedMilliseconds { get; set; }
-        public string GenerateTokenStackTrace { get; set; }
+        public string ValidateTokenRequest { get; set; }
+        public string ValidateTokenResponse { get; set; }
+        public bool ValidateTokenResponseStatus { get; set; }
+        public long ValidateTokenElapsedMilliseconds { get; set; }
+        public string ValidateTokenStackTrace { get; set; }
 
-        public string GenerateSecretStringRequest { get; set; }
-        public string GenerateSecretStringResponse { get; set; }
-        public bool GenerateSecretStringResponseStatus { get; set; }
-        public long GenerateSecretStringElapsedMilliseconds { get; set; }
-        public string GenerateSecretStringStackTrace { get; set; }
-
-        public string UserLoginRequest { get; set; }
-        public string UserLoginResponse { get; set; }
-        public bool UserLoginResponseStatus { get; set; }
-        public long UserLoginElapsedMilliseconds { get; set; }
-        public string UserLoginStackTrace { get; set; }
-
-        public string ValidateFacephiRequest { get; set; }
-        public string ValidateFacephiResponse { get; set; }
-        public bool ValidateFacephiResponseStatus { get; set; }
-        public long ValidateFacephiElapsedMilliseconds { get; set; }
-        public string ValidateFacephiStackTrace { get; set; }
+        public string ResyncDeviceRequest { get; set; }
+        public string ResyncDeviceResponse { get; set; }
+        public bool ResyncDeviceResponseStatus { get; set; }
+        public long ResyncDeviceElapsedMilliseconds { get; set; }
+        public string ResyncDeviceStackTrace { get; set; }
 
         public string TransactionStackTrace { get; set; }
     }
