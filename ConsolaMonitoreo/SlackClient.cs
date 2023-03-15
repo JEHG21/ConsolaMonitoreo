@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -54,19 +55,29 @@ namespace ConsolaMonitoreo
 
         public bool PostMessage(Payload payload)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            var req = new RestRequest(_uri, Method.POST);
+            req.Timeout = Convert.ToInt32(ConfigurationManager.AppSettings["EmailTimeout"]);
+            req.AddJsonBody(payload);
+
             try
             {
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                var req = new RestRequest(_uri, Method.POST);
-                req.AddJsonBody(payload);
                 var res = _client.Execute(req);
 
-                //Console.WriteLine(res.StatusCode.ToString());
-                return true;
+                Console.WriteLine($"Slack StatusCode: {res.StatusCode}");
+
+                if (res.StatusCode.ToString().Equals("OK"))
+                {
+                    return true;
+                }
+                if (res.ErrorException != null)
+                {
+                    Console.WriteLine($"Slack - Error en el envío de alerta - {res.ErrorMessage}");
+                }
             }
             catch (Exception ex)
             {
-                //Console.WriteLine(ex.Message);
+                Console.WriteLine($"Slack - Error en el envío de alerta - {ex.Message}");
             }
             return false;
         }

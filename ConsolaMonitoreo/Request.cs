@@ -248,6 +248,10 @@ namespace ConsolaMonitoreo
                 {
                     Console.WriteLine("Slack - Alerta enviada con éxito");
                 }
+                else
+                {
+                    Console.WriteLine($"Slack - No fue posible enviar la alerta");
+                }
             }
             catch (Exception ex)
             {
