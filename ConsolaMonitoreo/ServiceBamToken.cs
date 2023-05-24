@@ -80,14 +80,14 @@ namespace ConsolaMonitoreo
                 stopWatch.Stop();
                 responseTime = stopWatch.ElapsedMilliseconds;
 
-                string msg = "Lentitud en el servicio TokenBAM - AssignTokenType - " + transaction.Username + " - Petición cancelada por TimeOut - " + responseTime + " ms - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
+                string msg = $"Lentitud en el servicio TokenBAM - AssignTokenType - {transaction.Username} - Petición cancelada por TimeOut - { responseTime} ms - Server { ConfigurationManager.AppSettings[("ServerOrigin")]}";
 
                 Console.WriteLine(msg);
 
                 //Enviamos alerta interna por medio de Slack
                 Request.WebHookPostMessage(msg);
 
-                //Enviamos alerta al banco por medio de SmtpBAM
+                //Enviamos alerta al banco por medio de Email
                 ServiceEmail.SendMail(msg);
 
                 transaction.AssignTokenTypeStackTrace = e.StackTrace;
@@ -156,7 +156,7 @@ namespace ConsolaMonitoreo
                 //Enviamos alerta interna por medio de Slack
                 Request.WebHookPostMessage(msg);
 
-                //Enviamos alerta al banco por medio de SmtpBAM
+                //Enviamos alerta al banco por medio de Email
                 ServiceEmail.SendMail(msg);
 
                 transaction.GetTokenTypeStackTrace = e.StackTrace;
@@ -218,14 +218,14 @@ namespace ConsolaMonitoreo
                 stopWatch.Stop();
                 responseTime = stopWatch.ElapsedMilliseconds;
 
-                string msg = "Lentitud en el servicio TokenBAM - ValidateToken - " + transaction.Username + " - Petición cancelada por TimeOut - " + responseTime + " ms - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
+                string msg = $"Lentitud en el servicio TokenBAM - ValidateToken - {transaction.Username} - Petición cancelada por TimeOut - {responseTime} ms - Server { ConfigurationManager.AppSettings[("ServerOrigin")]}";
 
                 Console.WriteLine(msg);
 
                 //Enviamos alerta interna por medio de Slack
                 Request.WebHookPostMessage(msg);
 
-                //Enviamos alerta al banco por medio de SmtpBAM
+                //Enviamos alerta al banco por medio de Email
                 ServiceEmail.SendMail(msg);
 
                 transaction.ValidateTokenStackTrace = e.StackTrace;
@@ -287,14 +287,14 @@ namespace ConsolaMonitoreo
                 stopWatch.Stop();
                 responseTime = stopWatch.ElapsedMilliseconds;
 
-                string msg = "Lentitud en el servicio TokenBAM - ResyncDevice - UserMonitoreo" + " - Petición cancelada por TimeOut - " + responseTime + " ms - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
+                string msg = $"Lentitud en el servicio TokenBAM - ResyncDevice - UserMonitoreo - Petición cancelada por TimeOut - {responseTime}  ms - Server { ConfigurationManager.AppSettings[("ServerOrigin")]}";
 
                 Console.WriteLine(msg);
 
                 //Enviamos alerta interna por medio de Slack
                 Request.WebHookPostMessage(msg);
 
-                //Enviamos alerta al banco por medio de SmtpBAM
+                //Enviamos alerta al banco por medio de Email
                 ServiceEmail.SendMail(msg);
 
                 transaction.ResyncDeviceStackTrace = e.StackTrace;

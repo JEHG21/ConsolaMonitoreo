@@ -14,12 +14,12 @@ namespace ConsolaMonitoreo
         {
             Request.AssignTokenType();
             Console.WriteLine("Executing AssignTokenType...");
-            Request.GetTokenType();
-            Console.WriteLine("Executing GetTokenType...");
-            Request.ValidateToken();
-            Console.WriteLine("Executing ValidateToken...");
-            Request.ResyncDevice();
-            Console.WriteLine("Executing ResyncDevice...");
+            //Request.GetTokenType();
+            //Console.WriteLine("Executing GetTokenType...");
+            //Request.ValidateToken();
+            //Console.WriteLine("Executing ValidateToken...");
+            //Request.ResyncDevice();
+            //Console.WriteLine("Executing ResyncDevice...");
         }
     }
 }

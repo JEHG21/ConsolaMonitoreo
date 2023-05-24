@@ -57,7 +57,7 @@ namespace ConsolaMonitoreo
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             var req = new RestRequest(_uri, Method.POST);
-            req.Timeout = Convert.ToInt32(ConfigurationManager.AppSettings["EmailTimeout"]);
+            req.Timeout = Convert.ToInt32(ConfigurationManager.AppSettings["ResponseTimeLimit"]);
             req.AddJsonBody(payload);
 
             try

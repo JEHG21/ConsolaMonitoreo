@@ -50,7 +50,7 @@ namespace ConsolaMonitoreo
 
                         if (!response.errCode.Equals("204"))
                         {
-                            string msg = "Respuesta no esperada - AssignTokenType - " + transaction.Username + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
+                            string msg = $"Respuesta no esperada - AssignTokenType - {transaction.Username} - Respuesta: {response.errMsg} - Server {ConfigurationManager.AppSettings[("ServerOrigin")]}";
 
                             Console.WriteLine(msg);
 
@@ -58,7 +58,7 @@ namespace ConsolaMonitoreo
                             WebHookPostMessage(msg);
 
                             //Enviamos alerta al banco por medio de SmtpBAM
-                            ServiceEmail.SendMail(msg);
+                           ServiceEmail.SendMail(msg);
                         }
                     }
                 }
@@ -73,7 +73,6 @@ namespace ConsolaMonitoreo
 
         public static void GetTokenType()
         {
-            var rnd = new Random();
             var dataList = new List<Transaction>();
             var engine = new FileHelperEngine<User>();
             var records = engine.ReadFile("datos.txt");
@@ -102,8 +101,7 @@ namespace ConsolaMonitoreo
 
                         if (!response.errCode.Equals("003"))
                         {
-                            string msg = "Respuesta no esperada - GetTokenType - " + transaction.Username + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
-
+                            string msg = $"Respuesta no esperada - GetTokenType - {transaction.Username}  - Respuesta:  {response.errMsg} - Server  { ConfigurationManager.AppSettings[("ServerOrigin")]}" ;
                             Console.WriteLine(msg);
 
                             //Enviamos alerta interna por medio de Slack
@@ -156,13 +154,9 @@ namespace ConsolaMonitoreo
 
                     var response = JsonConvert.DeserializeObject<Response>(validateToken);
 
-                    if (response.errCode.Equals("200") || response.errCode.Equals("303"))
+                    if (!response.errCode.Equals("303"))
                     {
-
-                    }
-                    else
-                    {
-                        string msg = "Respuesta no esperada - ValidateToken - " + transaction.Username + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
+                        string msg = $"Respuesta no esperada - ValidateToken - {transaction.Username} - Respuesta:  {response.errMsg} - Server { ConfigurationManager.AppSettings[("ServerOrigin")]}";
 
                         Console.WriteLine(msg);
 
@@ -172,6 +166,7 @@ namespace ConsolaMonitoreo
                         //Enviamos alerta al banco por medio de SmtpBAM
                         ServiceEmail.SendMail(msg);
                     }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -208,13 +203,9 @@ namespace ConsolaMonitoreo
 
                     var response = JsonConvert.DeserializeObject<Response>(resyncDevice);
 
-                    if (response.errCode.Equals("850"))
+                    if (!response.errCode.Equals("850"))
                     {
-
-                    }
-                    else
-                    {
-                        string msg = "Respuesta no esperada - ResyncDevice - UserMonitoreo" + " - Respuesta: " + response.errMsg.ToString() + " - Server " + ConfigurationManager.AppSettings[("ServerOrigin")];
+                        string msg = $"Respuesta no esperada - ResyncDevice - UserMonitoreo - Respuesta: { response.errMsg.ToString()} - Server { ConfigurationManager.AppSettings[("ServerOrigin")]}";
 
                         Console.WriteLine(msg);
 
@@ -223,7 +214,9 @@ namespace ConsolaMonitoreo
 
                         //Enviamos alerta al banco por medio de SmtpBAM
                         ServiceEmail.SendMail(msg);
+
                     }
+                  
                 }
                 catch (Exception ex)
                 {
